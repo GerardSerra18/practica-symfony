@@ -82,12 +82,10 @@ class ProviderController extends AbstractController
     /**
     * @Route("/providers/{id}", name="provider_delete", methods={"DELETE"})
     */
-    public function delete(Request $request, Provider $provider): Response
+    public function delete(Request $request, Provider $provider, ProviderRepository $providerRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$provider->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($provider);
-            $entityManager->flush();
+            $providerRepository->deleteProvider($provider);
         }
 
         return $this->redirectToRoute('provider_index');

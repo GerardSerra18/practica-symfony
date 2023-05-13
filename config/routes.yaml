@@ -26,7 +26,7 @@ provider_edit:
 provider_delete:
     path: /providers/{id}
     controller: App\Controller\ProviderController::delete
-    methods: DELETE
+    methods: POST|DELETE
 
 
 
