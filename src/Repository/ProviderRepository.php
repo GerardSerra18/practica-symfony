@@ -54,4 +54,16 @@ class ProviderRepository extends ServiceEntityRepository{
         $entityManager->flush();
     }
 
+    public function editProvider(Provider $provider, array $data): void
+    {
+        $provider->setProviderName($data['provider_name']);
+        $provider->setEmail($data['email']);
+        $provider->setPhone($data['phone']);
+        $provider->setProviderType($data['provider_type']);
+        $provider->setIsActive($data['isActive']);
+
+        $entityManager = $this->getEntityManager();
+        $entityManager->flush();
+    }
+
 }

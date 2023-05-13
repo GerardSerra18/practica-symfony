@@ -50,15 +50,23 @@ class ProviderController extends AbstractController
 
 
     /**
-     * @Route("/providers/{id}/edit", name="provider_edit", methods={"GET", "POST"})
+    * @Route("/providers/{id}/edit", name="provider_edit", methods={"GET", "POST"})
     */
-    public function edit(Request $request, Provider $provider): Response
+    public function edit(Request $request, Provider $provider, ProviderRepository $providerRepository): Response
     {
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $data = [
+                'provider_name' => $form->get('provider_name')->getData(),
+                'email' => $form->get('email')->getData(),
+                'phone' => $form->get('phone')->getData(),
+                'provider_type' => $form->get('provider_type')->getData(),
+                'isActive' => $form->get('isActive')->getData(),
+            ];
+
+            $providerRepository->editProvider($provider, $data);
 
             return $this->redirectToRoute('provider_index');
         }
@@ -68,6 +76,8 @@ class ProviderController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
 
     /**
     * @Route("/providers/{id}", name="provider_delete", methods={"DELETE"})

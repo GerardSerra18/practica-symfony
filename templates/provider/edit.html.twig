@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Provider{% endblock %}
+
+{% block body %}
+    <h1>Edit Provider</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.provider_name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.provider_type) }}
+        {{ form_row(form.isActive) }}
+
+        <button type="submit">Update</button>
+    {{ form_end(form) }}
+{% endblock %}
