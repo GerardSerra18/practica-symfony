@@ -8,3 +8,25 @@ app_homepage:
     path: /
     controller: App\Controller\ProviderController::index
 
+provider_index:
+    path: /providers
+    controller: App\Controller\ProviderController::index
+    methods: GET
+
+provider_new:
+    path: /providers/new
+    controller: App\Controller\ProviderController::new
+    methods: GET|POST
+
+provider_edit:
+    path: /providers/{id}/edit
+    controller: App\Controller\ProviderController::edit
+    methods: GET|POST
+
+provider_delete:
+    path: /providers/{id}
+    controller: App\Controller\ProviderController::delete
+    methods: DELETE
+
+
+

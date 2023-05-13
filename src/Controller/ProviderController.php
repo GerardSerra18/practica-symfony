@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use App\Entity\Provider;
 use App\Form\ProviderType;
 use App\Repository\ProviderRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -29,24 +31,23 @@ class ProviderController extends AbstractController
     /**
      * @Route("/providers/new", name="provider_new", methods={"GET", "POST"})
     */
-    public function new(Request $request): Response
+    public function new(Request $request, ProviderRepository $providerRepository): Response
     {
         $provider = new Provider();
         $form = $this->createForm(ProviderType::class, $provider);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($provider);
-            $entityManager->flush();
+            $providerRepository->createProvider($provider);
 
             return $this->redirectToRoute('provider_index');
-        }
+        }   
 
         return $this->render('provider/new.html.twig', [
             'form' => $form->createView(),
         ]);
     }
+
 
     /**
      * @Route("/providers/{id}/edit", name="provider_edit", methods={"GET", "POST"})
@@ -69,8 +70,8 @@ class ProviderController extends AbstractController
     }
 
     /**
-     * @Route("/providers/{id}", name="provider_delete", methods={"DELETE"})
-     */
+    * @Route("/providers/{id}", name="provider_delete", methods={"DELETE"})
+    */
     public function delete(Request $request, Provider $provider): Response
     {
         if ($this->isCsrfTokenValid('delete'.$provider->getId(), $request->request->get('_token'))) {
@@ -81,4 +82,5 @@ class ProviderController extends AbstractController
 
         return $this->redirectToRoute('provider_index');
     }
+
 }

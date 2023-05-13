@@ -34,6 +34,8 @@ class ProviderRepository extends ServiceEntityRepository{
 
     public function createProvider(Provider $provider){
 
+        $provider->setIsActive(true); // Establecer isActive como verdadero por defecto
+
         $entityManager = $this->getEntityManager();
         $entityManager->persist($provider);
         $entityManager->flush();

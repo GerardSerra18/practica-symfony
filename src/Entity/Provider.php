@@ -18,7 +18,7 @@ class Provider
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="provider_name", type="string", length=255)
      */
     private $provider_name;
 
@@ -38,11 +38,11 @@ class Provider
     private $provider_type;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="is_active", type="boolean")
      */
-    private $is_active;
+    private $isActive;
 
-    
+
     private $createdAt;
     private $updatedAt;
 
@@ -51,12 +51,12 @@ class Provider
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getProviderName(): ?string
     {
         return $this->provider_name;
     }
 
-    public function setName(string $name): self
+    public function setProviderName(string $name): self
     {
         $this->provider_name = $name;
 
@@ -87,7 +87,7 @@ class Provider
         return $this;
     }
 
-    public function getType(): ?string
+    public function getProviderType(): ?string
     {
         return $this->provider_type;
     }
@@ -101,15 +101,17 @@ class Provider
 
     public function isActive(): ?bool
     {
-        return $this->is_active;
+        return $this->isActive;
     }
 
-    public function setActive(bool $isActive): self
+    public function setisActive(?bool $isActive): self
     {
-        $this->is_active = $isActive;
+        $this->isActive = $isActive;
 
         return $this;
     }
+
+
 
     public function getCreatedAt(): ?\DateTimeInterface
     {

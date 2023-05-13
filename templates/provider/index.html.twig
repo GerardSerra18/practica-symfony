@@ -1,32 +1,46 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Lista de Proveedores{% endblock %}
+{% block title %}List of Providers{% endblock %}
 
 {% block body %}
-    <h1>Lista de Proveedores</h1>
+    <h1>List of Providers</h1>
 
     <table>
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Nombre</th>
+                <th>Name</th>
                 <th>Email</th>
-                <th>Teléfono</th>
-                <th>Tipo</th>
-                <th>Activo</th>
+                <th>Phone</th>
+                <th>Type</th>
+                <th>Active</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
+            <form action="{{ path('provider_new') }}" method="GET">
+                <button type="submit">New Provider</button>
+            </form>            
             {% for provider in providers %}
                 <tr>
                     <td>{{ provider.getId() }}</td>
-                    <td>{{ provider.getName() }}</td>
+                    <td>{{ provider.getProviderName() }}</td>
                     <td>{{ provider.getEmail() }}</td>
                     <td>{{ provider.getPhone() }}</td>
-                    <td>{{ provider.getType() }}</td>
-                    <td>{{ provider.isActive() ? 'Sí' : 'No' }}</td>
+                    <td>{{ provider.getProviderType() }}</td>
+                    <td>{{ provider.isActive() ? 'Active' : 'Inactive' }}</td>
+                    <td>
+                        <a href="{{ path('provider_edit', {id: provider.getId()}) }}">Edit</a>
+                        <form action="{{ path('provider_delete', {id: provider.getId()}) }}" method="POST">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ provider.getId()) }}">
+                            <button type="submit">Delete Provider</button>
+                        </form>                                                                      
+                    </td>
                 </tr>
             {% endfor %}
+
         </tbody>
     </table>
 {% endblock %}
+
