@@ -6,55 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProveedorRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProviderRepository")
  */
-class Proveedor
+class Provider
 {
-    /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
     private $id;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
     private $provider_name;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     * @Assert\Email()
-     */
     private $email;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
     private $phone;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
-     */
     private $provider_type;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
     private $is_active;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
     private $createdAt;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
     private $updatedAt;
 
     public function getId(): ?int
