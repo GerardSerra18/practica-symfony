@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Provider;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use DateTime;
 
 /**
  * Repository for the entity provider
@@ -34,7 +35,6 @@ class ProviderRepository extends ServiceEntityRepository{
 
     public function createProvider(Provider $provider){
 
-        $provider->setIsActive(true); // Establecer isActive como verdadero por defecto
 
         $entityManager = $this->getEntityManager();
         $entityManager->persist($provider);

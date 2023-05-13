@@ -18,9 +18,9 @@ class ProviderType extends AbstractType
             ->add('phone')
             ->add('provider_type', ChoiceType::class, [
                 'choices' => [
-                    'Hotel' => 'hotel',
-                    'Court' => 'court',
-                    'Complement' => 'complement',
+                    'Hotel' => 'Hotel',
+                    'Court' => 'Court',
+                    'Complement' => 'Complement',
                 ],
             ])
             ->add('isActive', ChoiceType::class, [
