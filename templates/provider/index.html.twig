@@ -8,7 +8,6 @@
     <table>
         <thead>
             <tr>
-                <th>ID</th>
                 <th>Name</th>
                 <th>Email</th>
                 <th>Phone</th>
@@ -18,23 +17,22 @@
             </tr>
         </thead>
         <tbody>
-            <form action="{{ path('provider_new') }}" method="GET">
-                <button type="submit">New Provider</button>
-            </form>            
+           
             {% for provider in providers %}
                 <tr>
-                    <td>{{ provider.getId() }}</td>
                     <td>{{ provider.getProviderName() }}</td>
                     <td>{{ provider.getEmail() }}</td>
                     <td>{{ provider.getPhone() }}</td>
                     <td>{{ provider.getProviderType() }}</td>
                     <td>{{ provider.isActive() ? 'Active' : 'Inactive' }}</td>
                     <td>
-                        <a href="{{ path('provider_edit', {id: provider.getId()}) }}">Edit</a>
+                        <form action="{{path('provider_edit', {id: provider.getId()}) }}" method="POST">
+                            <button type="submit-edit" class="action-button-edit">Edit Provider</button>
+                        </form> 
                         <form action="{{ path('provider_delete', {id: provider.getId()}) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this provider?')">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ provider.getId()) }}">
-                            <button type="submit">Delete Provider</button>
+                            <button type="submit-delete" class="action-button-delete">Delete Provider</button>
                         </form>                                                                                             
                     </td>
                 </tr>
@@ -42,5 +40,9 @@
 
         </tbody>
     </table>
-{% endblock %}
 
+    <form action="{{ path('provider_new') }}" method="GET">
+        <button type="submit-new" class="action-button-new">New Provider</button>
+    </form> 
+
+{% endblock %}
