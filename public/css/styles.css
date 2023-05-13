@@ -10,11 +10,22 @@ h1 {
     margin-top: 10px;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* index.html.twig */
 
 table {
     width: 90%;
     border-collapse: collapse;
+    margin: 0 auto;
+    border: 10px solid #ddd;
 }
 
 th,
@@ -86,7 +97,7 @@ button[type="submit-delete"] {
 /* new.html.twig y edit.html.twig */
 
 form {
-    width: 400px;
+    width: 200px;
     margin: 0 auto;
 }
 
