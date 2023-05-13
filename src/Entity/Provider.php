@@ -10,12 +10,39 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Provider
 {
+    /**
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
+     * @ORM\Column(type="integer")
+     */
     private $id;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $provider_name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
     private $provider_type;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
     private $is_active;
+
+    
     private $createdAt;
     private $updatedAt;
 
@@ -29,9 +56,9 @@ class Provider
         return $this->provider_name;
     }
 
-    public function setName(string $provider_name): self
+    public function setName(string $name): self
     {
-        $this->provider_name = $provider_name;
+        $this->provider_name = $name;
 
         return $this;
     }
@@ -62,12 +89,12 @@ class Provider
 
     public function getType(): ?string
     {
-        return $this->type;
+        return $this->provider_type;
     }
 
-    public function setType(string $provider_type): self
+    public function setProviderType(string $type): self
     {
-        $this->provider_type = $provider_type;
+        $this->provider_type = $type;
 
         return $this;
     }
@@ -77,9 +104,9 @@ class Provider
         return $this->is_active;
     }
 
-    public function setActive(bool $is_active): self
+    public function setActive(bool $isActive): self
     {
-        $this->is_active = $is_active;
+        $this->is_active = $isActive;
 
         return $this;
     }

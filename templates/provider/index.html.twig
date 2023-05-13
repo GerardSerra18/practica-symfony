@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Lista de Proveedores{% endblock %}
+
+{% block body %}
+    <h1>Lista de Proveedores</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Email</th>
+                <th>Teléfono</th>
+                <th>Tipo</th>
+                <th>Activo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for provider in providers %}
+                <tr>
+                    <td>{{ provider.getId() }}</td>
+                    <td>{{ provider.getName() }}</td>
+                    <td>{{ provider.getEmail() }}</td>
+                    <td>{{ provider.getPhone() }}</td>
+                    <td>{{ provider.getType() }}</td>
+                    <td>{{ provider.isActive() ? 'Sí' : 'No' }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
